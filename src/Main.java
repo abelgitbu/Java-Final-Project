@@ -11,7 +11,7 @@ import java.awt.event.*;
 
 public class Main implements MouseListener, ActionListener {
     private CButton button;
-    private ATextField textField;
+    private DTextField textField;
 
     public static void main(String[] args) {
         new Main().testCButton();
@@ -21,7 +21,7 @@ public class Main implements MouseListener, ActionListener {
         JFrame frame = new JFrame("CButton");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout());
-        frame.setSize(400, 400);
+        frame.setSize(430, 420);
 
         JLabel label1 = new JLabel("left");
         label1.setBackground(Color.GREEN);
@@ -33,6 +33,8 @@ public class Main implements MouseListener, ActionListener {
         button = new CButton("C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\normal.png",
                 "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\press.png",
                 "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\hover.png");
+        button.addActionListener(this);
+        button.addMouseListener(this);
         JPanel panelButton = button.getPanelButton();
         frame.add(panelButton);
 
@@ -53,14 +55,53 @@ public class Main implements MouseListener, ActionListener {
         //label.add(b1);
         frame.add(label);
 
-        textField = new ATextField("C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\normal.png",
-                "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\press.png",
-                BorderFactory.createLineBorder(Color.GREEN, 3), "water mark");
-        textField.setLocationTextFieldToPanel(0, 0, 50, 50);
-        frame.add(textField.getPanelTextField());
+        textField = new DTextField("C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\normal.png",
+                "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\press.png", 30, 17,
+                300, 35, "Water Mark");
+        textField.moveWaterMarkPosition(0, 2, 0, 0);
+        textField.customizeWaterMark("", Font.PLAIN, 30, 129, 83, 154);
+        textField.customizeTextField("", Font.PLAIN, 30, 0, 0, 0);
+        CButton buttonTextField = new CButton("C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\nNormal.png",
+                "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\pHover.png",
+                "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\nPressH.png");
+        buttonTextField.addActionListener(this);
+        buttonTextField.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        JPanel panelTextButt = button.getPanelButton();
+        textField.addComponent(panelButton, 10, 10, 40, 40);
+
+        frame.add(textField);
+        new Color(129, 83, 154);
+
+        frame.add(new JButton("a;sdlfjjjjjjjjjj"));
         frame.setVisible(true);
     }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
