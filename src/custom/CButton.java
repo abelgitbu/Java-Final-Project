@@ -1,4 +1,4 @@
-package custom;
+package src.custom;
 
 import javax.swing.*;
 import java.awt.*;

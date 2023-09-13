@@ -1,7 +1,7 @@
 package src;
 
-import custom.CButton;
-import custom.CLabel;
+import src.custom.CButton;
+import src.custom.CLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,10 +43,9 @@ public class Main implements MouseListener, ActionListener {
         label.setText("Hello");
         label.moveTextOrComponent(80, 0, 10, 30, -1);
         label.customizeText("Ink Free", Font.ITALIC, 30, 55, 45, 100);
-        label.addComponentToLabel(new JButton("hello"), 300, 0, 0, 20);
+        int myIndex = label.addComponentToLabel(new JButton("hello"), 300, 0, 0, 20);
         label.addComponentToLabel(new JLabel("HI Abel"), 0, 0, 0, 20);
         label.moveTextOrComponent(0, 300, 0, 0, 1);
-
 
         JButton b1 = new JButton("Hello");
         b1.setPreferredSize(new Dimension(40, 40));

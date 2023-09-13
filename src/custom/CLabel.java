@@ -1,4 +1,4 @@
-package custom;
+package src.custom;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -75,7 +75,7 @@ public class CLabel extends JLabel {
         }
         setForeground(new Color(r, g, b));
     }
-    public void addComponentToLabel(Component component, int moveToRight, int moveToLeft, int moveToTop, int moveToBottom) {
+    public int addComponentToLabel(Component component, int moveToRight, int moveToLeft, int moveToTop, int moveToBottom) {
         JPanel panel = new JPanel();
         labelSize();
         panel.setBounds(0, 0, width, height);
@@ -87,6 +87,8 @@ public class CLabel extends JLabel {
         ++compIndex;
 
         moveTextOrComponent(moveToRight, moveToLeft, moveToTop, moveToBottom, (compIndex - 1));
+
+        return (compIndex - 1);
     }
 
     public void labelSize() {
