@@ -1,6 +1,7 @@
 package src;
 
 import src.custom.CButton;
+import src.custom.CComboList;
 import src.custom.CLabel;
 import src.custom.customTextField.CTextField;
 
@@ -66,7 +67,34 @@ public class Main implements ActionListener {
         textField.addComponent(panelTextButt, 340, 10, 40, 40);
 
         frame.add(textField);
-        new Color(129, 83, 154);
+
+        JLabel labelWindow = new JLabel("ComboBox");
+        labelWindow.setOpaque(true);
+        labelWindow.setPreferredSize(new Dimension(100, 33));
+        frame.add(labelWindow);
+
+        JButton buttonWindow = new JButton("combo");
+        buttonWindow.setPreferredSize(new Dimension(60, 40));
+        frame.add(buttonWindow);
+
+        frame.setVisible(true);
+        //frame must be visible and all components in the CComboList constructor must be added before creating an object of CComboList
+        CComboList comboBox = new CComboList(frame, labelWindow, buttonWindow, "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\background.png");
+        JButton buttonScrollBar = new JButton();
+        buttonScrollBar.setPreferredSize(new Dimension(0, 0));
+
+        comboBox.customizeScrollBar(new Color(34, 34, 34), new Color(100, 4, 45), buttonScrollBar, 15, 20, false);
+
+        JButton[] bu = new JButton[20];
+
+        for(int i = 0; i < 20; i++) {
+            bu[i] = new JButton("hello");
+        }
+
+        comboBox.addCompToList(bu[0], 20, 10, 10, 10);
+        for(int i = 1; i < 20; i++) {
+            comboBox.addCompToList(bu[i], 7, 10, 7, 10);
+        }
 
         frame.add(new JButton("a;sdlfjjjjjjjjjj"));
         frame.setVisible(true);
