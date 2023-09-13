@@ -1,10 +1,6 @@
-package src;
-
-import src.custom.DeselectPanel;
-import src.custom.SelectPanel;
+package src.custom.customTextField;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -13,38 +9,30 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Objects;
 
-public class DTextField extends JPanel implements FocusListener, DocumentListener {
+public class CTextField extends JPanel implements FocusListener, DocumentListener {
     {
          textField = new JTextField();
-         panelDeselectImage = new JPanel();
-         panelSelectImage = new JPanel();
          waterMarkLabel = new JLabel();
     }
 
-    private final ImageIcon selectImage;
-    private final ImageIcon deselectImage;
-    private final JPanel panelSelectImage;
-    private final JPanel panelDeselectImage;
     private final SelectPanel selectPanel;
-    private final  DeselectPanel deselectPanel;
-    int panelWidth = 0;
-    int panelHeight = 0;
+    private final DeselectPanel deselectPanel;
     private final JTextField textField;
     private final String waterMarkString;
     private final JLabel waterMarkLabel;
 
 
-    public DTextField(String deselectFile, String selectFile, int x, int y, int textFieldWidth, int textFieldHeight, String waterMarkString) {
+    public CTextField(String deselectFile, String selectFile, int x, int y, int textFieldWidth, int textFieldHeight, String waterMarkString) {
         this.waterMarkString = waterMarkString;
         waterMarkLabel.setText(this.waterMarkString);
 
         textField.add(waterMarkLabel);
 
-        selectImage = new ImageIcon(selectFile);
-        deselectImage = new ImageIcon(deselectFile);
+        ImageIcon selectImage = new ImageIcon(selectFile);
+        ImageIcon deselectImage = new ImageIcon(deselectFile);
 
-        panelWidth = selectImage.getIconWidth();
-        panelHeight = selectImage.getIconHeight();
+        int panelWidth = selectImage.getIconWidth();
+        int panelHeight = selectImage.getIconHeight();
 
         setPreferredSize(new Dimension(panelWidth, panelHeight));
         setLayout(null);
@@ -117,7 +105,7 @@ public class DTextField extends JPanel implements FocusListener, DocumentListene
         component.setBounds(x, y, width, height);
         add(component);
     }
-    public JTextField getTextField() {
+    public JTextField getTextField() { // If you want event handling on the textField
         return textField;
     }
     @Override
@@ -134,7 +122,7 @@ public class DTextField extends JPanel implements FocusListener, DocumentListene
     @Override
     public void insertUpdate(DocumentEvent e) {
         if(Objects.equals("", textField.getText())) {
-            waterMarkLabel.setText("" + waterMarkString);
+            waterMarkLabel.setText(waterMarkString);
         }
         else {
             waterMarkLabel.setText("");
@@ -144,7 +132,7 @@ public class DTextField extends JPanel implements FocusListener, DocumentListene
     @Override
     public void removeUpdate(DocumentEvent e) {
         if(Objects.equals("", textField.getText())) {
-            waterMarkLabel.setText("" + waterMarkString);
+            waterMarkLabel.setText(waterMarkString);
         }
         else {
             waterMarkLabel.setText("");
@@ -154,7 +142,7 @@ public class DTextField extends JPanel implements FocusListener, DocumentListene
     @Override
     public void changedUpdate(DocumentEvent e) {
         if(Objects.equals("", textField.getText())) {
-            waterMarkLabel.setText("" + waterMarkString);
+            waterMarkLabel.setText(waterMarkString);
         }
         else {
             waterMarkLabel.setText("");

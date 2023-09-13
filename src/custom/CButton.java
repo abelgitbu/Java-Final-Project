@@ -2,10 +2,13 @@ package src.custom;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class CButton extends JButton {
+public class CButton extends JButton implements MouseListener {
     {
         panelButton = new JPanel();
+        addMouseListener(this);
     }
 
     private ImageIcon buttonBackgroundImage;
@@ -173,5 +176,30 @@ public class CButton extends JButton {
                   draw the image starting from the top-left (0, 0) corner of the component.
             */
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        getNormalButton();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        getClickedButton();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        getNormalButton();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        getHoveredButton();
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        getNormalButton();
     }
 }
