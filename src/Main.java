@@ -1,7 +1,9 @@
 package src;
 
+import src.custom.ATextField;
 import src.custom.CButton;
 import src.custom.CLabel;
+import src.custom.CTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,7 @@ import java.awt.event.*;
 
 public class Main implements MouseListener, ActionListener {
     private CButton button;
+    private ATextField textField;
 
     public static void main(String[] args) {
         new Main().testCButton();
@@ -32,8 +35,6 @@ public class Main implements MouseListener, ActionListener {
                 "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\hover.png");
         JPanel panelButton = button.getPanelButton();
         frame.add(panelButton);
-        button.addMouseListener(this);
-        button.addActionListener(this);
 
         JLabel label2 = new JLabel("left");
         label2.setPreferredSize(new Dimension(40, 40));
@@ -51,6 +52,12 @@ public class Main implements MouseListener, ActionListener {
         b1.setPreferredSize(new Dimension(40, 40));
         //label.add(b1);
         frame.add(label);
+
+        textField = new ATextField("C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\normal.png",
+                "C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\press.png",
+                BorderFactory.createLineBorder(Color.GREEN, 3), "water mark");
+        textField.setLocationTextFieldToPanel(0, 0, 50, 50);
+        frame.add(textField.getPanelTextField());
 
         frame.setVisible(true);
     }

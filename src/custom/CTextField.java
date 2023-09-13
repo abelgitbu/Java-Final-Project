@@ -2,14 +2,17 @@ package src.custom;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class CTextField extends JTextField implements FocusListener, ActionListener {
+public class CTextField extends JTextField implements ActionListener, DocumentListener {
     {
         panelTextField = new JPanel();
         toAddComponentForNormalTextField = new ArrayList<>();
@@ -31,12 +34,17 @@ public class CTextField extends JTextField implements FocusListener, ActionListe
     private ArrayList<EmptyBorderValues> emptyNormal;
     private ArrayList<EmptyBorderValues> emptySelected;
     private final JLabel labelWaterMark;
+    private final String textWaterMark;
 
     public CTextField(String fileNormalTextField, String fileSelectedTextField, String fileEnteredTextField, String waterMark) {
+        this.textWaterMark = waterMark;
+
         this.imageNormalTextField = new ImageIcon(fileNormalTextField);
         this.imageSelectedTextField = new ImageIcon(fileSelectedTextField);
         this.imageEnteredTextField = new ImageIcon(fileEnteredTextField);
         textFieldBackgroundImage = this.imageNormalTextField;
+
+        setBackground(Color.GREEN);
 
         setWaterMark(waterMark);
 
@@ -49,6 +57,13 @@ public class CTextField extends JTextField implements FocusListener, ActionListe
                 this.imageNormalTextField.getIconHeight()));
         setOpaque(false);
         setLayout(null);
+        setEnabled(true);
+        setEditable(true);
+        setBorder(null);
+
+        addActionListener(this);
+        //addFocusListener(this);
+        getDocument().addDocumentListener(this);
 
         panelTextField.setOpaque(false);
         panelTextField.add(this);
@@ -105,6 +120,7 @@ public class CTextField extends JTextField implements FocusListener, ActionListe
         this.textFieldBackgroundImage = imageNormalTextField;
 
         setVisible(false);
+        setOpaque(true);
         panelTextField.remove(this);
         setPreferredSize(new Dimension(this.imageNormalTextField.getIconWidth(),
                 this.imageNormalTextField.getIconHeight()));
@@ -157,22 +173,7 @@ public class CTextField extends JTextField implements FocusListener, ActionListe
         CTextField.EmptyBorderValues values = this.new EmptyBorderValues(moveToRight, moveToLeft, moveToTop, moveToBottom);
         emptySelected.add(values);
 
-        addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                for(int i = 0; i < toAddComponentForSelectedTextField.size(); i++) {
-                    toAddComponentForSelectedTextField.get(i).setBounds(0, 0, imageSelectedTextField.getIconWidth(), imageSelectedTextField.getIconHeight());
-                    toAddComponentForSelectedTextField.get(i).setBorder(new EmptyBorder(emptySelected.get(i).getMoveToBottom(), emptySelected.get(i).getMoveToRight(),
-                            emptySelected.get(i).getMoveToTop(), emptySelected.get(i).getMoveToLeft()));
-                    add(toAddComponentForSelectedTextField.get(i));
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                    // Nothing to do till Know
-            }
-        });
+//        addFocusListener(this);
     }
     public void addComponentWhenTextFieldNormal(Component component, int moveToRight, int moveToLeft, int moveToTop, int moveToBottom) {
         JPanel panel = new JPanel();
@@ -183,22 +184,7 @@ public class CTextField extends JTextField implements FocusListener, ActionListe
         CTextField.EmptyBorderValues values = this.new EmptyBorderValues(moveToRight, moveToLeft, moveToTop, moveToBottom);
         emptyNormal.add(values);
 
-        addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                for(int i = 0; i < toAddComponentForNormalTextField.size(); i++) {
-                    toAddComponentForNormalTextField.get(i).setBounds(0, 0, imageNormalTextField.getIconWidth(), imageNormalTextField.getIconHeight());
-                    toAddComponentForNormalTextField.get(i).setBorder(new EmptyBorder(emptyNormal.get(i).getMoveToBottom(), emptyNormal.get(i).getMoveToRight(),
-                            emptyNormal.get(i).getMoveToTop(), emptyNormal.get(i).getMoveToLeft()));
-                    add(toAddComponentForNormalTextField.get(i));
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                // Nothing to do till Know
-            }
-        });
+//        addFocusListener(this);
     }
 
     public JPanel getPanelTextField() {
@@ -216,18 +202,62 @@ public class CTextField extends JTextField implements FocusListener, ActionListe
         }
     }
 
-    @Override
+/*    @Override
     public void focusGained(FocusEvent e) {
+        for(int i = 0; i < toAddComponentForSelectedTextField.size(); i++) {
+            toAddComponentForSelectedTextField.get(i).setBounds(0, 0, imageSelectedTextField.getIconWidth(), imageSelectedTextField.getIconHeight());
+            toAddComponentForSelectedTextField.get(i).setBorder(new EmptyBorder(emptySelected.get(i).getMoveToBottom(), emptySelected.get(i).getMoveToRight(),
+                    emptySelected.get(i).getMoveToTop(), emptySelected.get(i).getMoveToLeft()));
+            add(toAddComponentForSelectedTextField.get(i));
+        }
 
+        getSelectedTextField();
     }
     @Override
     public void focusLost(FocusEvent e) {
+        for(int i = 0; i < toAddComponentForNormalTextField.size(); i++) {
+            toAddComponentForNormalTextField.get(i).setBounds(0, 0, imageNormalTextField.getIconWidth(), imageNormalTextField.getIconHeight());
+            toAddComponentForNormalTextField.get(i).setBorder(new EmptyBorder(emptyNormal.get(i).getMoveToBottom(), emptyNormal.get(i).getMoveToRight(),
+                    emptyNormal.get(i).getMoveToTop(), emptyNormal.get(i).getMoveToLeft()));
+            add(toAddComponentForNormalTextField.get(i));
+        }
 
-    }
+        getNormalTextField();
+    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        getEnteredTextField();
+    }
 
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        if(Objects.equals("", getText())) {
+            labelWaterMark.setText(textWaterMark);
+        }
+        else {
+            labelWaterMark.setText("");
+        }
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        if(Objects.equals("", getText())) {
+            labelWaterMark.setText(textWaterMark);
+        }
+        else {
+            labelWaterMark.setText("");
+        }
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        if(Objects.equals("", getText())) {
+            labelWaterMark.setText(textWaterMark);
+        }
+        else {
+            labelWaterMark.setText("");
+        }
     }
 
     class EmptyBorderValues {
