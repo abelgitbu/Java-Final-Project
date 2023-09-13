@@ -3,6 +3,7 @@ package src;
 import src.custom.CButton;
 import src.custom.CComboList;
 import src.custom.CLabel;
+import src.custom.CPanel;
 import src.custom.customTextField.CTextField;
 
 import javax.swing.*;
@@ -95,6 +96,10 @@ public class Main implements ActionListener {
         for(int i = 1; i < 20; i++) {
             comboBox.addCompToList(bu[i], 7, 10, 7, 10);
         }
+
+        CPanel panelC = new CPanel("C:\\Users\\user\\Documents\\java\\Java-Final-Project\\Image\\background.png",
+                200, 100, BorderFactory.createLineBorder(Color.PINK, 1));
+        frame.add(panelC);
 
         frame.add(new JButton("a;sdlfjjjjjjjjjj"));
         frame.setVisible(true);
