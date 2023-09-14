@@ -7,10 +7,10 @@ import java.awt.*;
 public class CPanel extends JPanel {
     private final ImageIcon panelBackground;
 
-    public CPanel(String background, int width, int height, Border border) {
+    public CPanel(String background, int width, int height) {
         this.panelBackground = new ImageIcon(background);
-        setBorder(border);
         setPreferredSize(new Dimension(width, height));
+        setOpaque(false);
     }
 
     @Override

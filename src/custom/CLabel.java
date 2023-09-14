@@ -27,6 +27,17 @@ public class CLabel extends JLabel {
 
         setLayout(null);
     }
+    public CLabel(ImageIcon labelBackgroundImage, boolean onlyText) {
+        this.labelBackgroundImage = labelBackgroundImage;
+        labelSize();
+        setPreferredSize(new Dimension(width, height));
+
+        if(!onlyText) {
+            setOpaque(true);
+        }
+
+        setLayout(null);
+    }
 
     public void moveTextOrComponent(int moveToRight, int moveToLeft, int moveToTop, int moveToBottom, int forWhichComp) {
         labelSize();
