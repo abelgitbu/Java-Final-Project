@@ -58,6 +58,39 @@ public class CTextField extends JPanel implements FocusListener, DocumentListene
         textField.getDocument().addDocumentListener(this);
         textField.setBorder(null);
     }
+    public CTextField(ImageIcon dImage, ImageIcon sImage, int x, int y, int textFieldWidth, int textFieldHeight, String waterMarkString) {
+        this.waterMarkString = waterMarkString;
+        waterMarkLabel.setText(this.waterMarkString);
+
+        textField.add(waterMarkLabel);
+
+        int panelWidth = sImage.getIconWidth();
+        int panelHeight = sImage.getIconHeight();
+
+        setPreferredSize(new Dimension(panelWidth, panelHeight));
+        setLayout(null);
+        setOpaque(false);
+        setVisible(true);
+        setBorder(null);
+
+        add(textField);
+
+        selectPanel = new SelectPanel(sImage, panelWidth, panelHeight);
+        selectPanel.setOpaque(false);
+        deselectPanel = new DeselectPanel(dImage, panelWidth, panelHeight);
+        deselectPanel.setOpaque(false);
+        add(selectPanel);
+        add(deselectPanel);
+
+        textField.setBounds(x, y, textFieldWidth, textFieldHeight);
+        textField.setOpaque(false);
+        textField.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        setWaterMark(this.waterMarkString);
+
+        textField.addFocusListener(this);
+        textField.getDocument().addDocumentListener(this);
+        textField.setBorder(null);
+    }
 
     public void setWaterMark(String waterMark) {
         waterMarkLabel.setText("" + waterMark);

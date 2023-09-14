@@ -7,9 +7,9 @@ import java.awt.*;
 public class CPanel extends JPanel {
     private final ImageIcon panelBackground;
 
-    public CPanel(String background, int width, int height) {
+    public CPanel(String background) {
         this.panelBackground = new ImageIcon(background);
-        setPreferredSize(new Dimension(width, height));
+        setPreferredSize(new Dimension(this.panelBackground.getIconWidth(), this.panelBackground.getIconHeight()));
         setOpaque(false);
     }
 

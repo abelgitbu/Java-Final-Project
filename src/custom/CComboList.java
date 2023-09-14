@@ -101,6 +101,9 @@ public class CComboList extends JPanel implements ComponentListener {
             }
         });
     }
+    public void opacityValue(float x) {
+        jWindow.setOpacity(x);
+    }
     public void addCompToList(Component addComponent, int top, int left, int bottom, int right) {
         this.constraints.insets.set(top, left, bottom, right);
         add(addComponent, this.constraints);
