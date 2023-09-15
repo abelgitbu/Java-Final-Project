@@ -16,6 +16,8 @@ public class CButton extends JButton implements MouseListener {
     private final ImageIcon imageHoveredButton;
     private final ImageIcon imageClickedButton;
     private final JPanel panelButton;
+    private int width;
+    private int height;
 
     public CButton(String fileNormalButton) {
         this.imageNormalButton = new ImageIcon(fileNormalButton);
@@ -43,8 +45,8 @@ public class CButton extends JButton implements MouseListener {
         this.imageClickedButton = new ImageIcon(fileClickedButton);
         buttonBackgroundImage = this.imageNormalButton;
 
-        int width = bigWidth();
-        int height = bigHeight();
+        width = bigWidth();
+        height = bigHeight();
         panelButton.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         panelButton.setPreferredSize(new Dimension(width, height));
 
@@ -61,7 +63,12 @@ public class CButton extends JButton implements MouseListener {
         this(fileNormalButton, fileHoveredButton, fileClickedButton);
         container.add(panelButton, con);
     }
-
+    public int getPanelHeight() {
+        return height;
+    }
+    public int getPanelWidth() {
+        return width;
+    }
     public int bigHeight() {
         if(imageNormalButton.getIconHeight() > imageHoveredButton.getIconHeight() && imageNormalButton.getIconHeight() >
                 imageClickedButton.getIconHeight()) {

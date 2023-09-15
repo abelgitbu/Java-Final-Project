@@ -141,6 +141,12 @@ public class CTextField extends JPanel implements FocusListener, DocumentListene
     public JTextField getTextField() { // If you want event handling on the textField
         return textField;
     }
+    public int getTextFieldWidth() {
+        return deselectPanel.getWidth();
+    }
+    public int getTextFieldHeight() {
+        return deselectPanel.getHeight();
+    }
     @Override
     public void focusGained(FocusEvent e) {
         deselectPanel.setVisible(false);

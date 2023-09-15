@@ -12,6 +12,17 @@ public class CPanel extends JPanel {
         setPreferredSize(new Dimension(this.panelBackground.getIconWidth(), this.panelBackground.getIconHeight()));
         setOpaque(false);
     }
+    public CPanel(ImageIcon image) {
+        this.panelBackground = image;
+        setPreferredSize(new Dimension(this.panelBackground.getIconWidth(), this.panelBackground.getIconHeight()));
+        setOpaque(false);
+    }
+    public int getPanelWidth() {
+        return panelBackground.getIconWidth();
+    }
+    public int getPanelHeight() {
+        return panelBackground.getIconHeight();
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

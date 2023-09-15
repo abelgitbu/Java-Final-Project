@@ -17,7 +17,6 @@ public class SelectPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         if (selectImage != null) {
             Image imageSelect = selectImage.getImage();
 

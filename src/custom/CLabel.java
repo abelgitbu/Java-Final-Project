@@ -107,6 +107,15 @@ public class CLabel extends JLabel {
         height = labelBackgroundImage.getIconHeight();
     }
 
+    public int getLabelWidth() {
+        labelSize();
+        return width;
+    }
+    public int getLabelHeight() {
+        labelSize();
+        return height;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -114,6 +123,7 @@ public class CLabel extends JLabel {
         if (labelBackgroundImage != null) {
             Image image = labelBackgroundImage.getImage();
 
+            System.out.println("panint");
             g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         }
     }
